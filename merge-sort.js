@@ -1,34 +1,46 @@
 // Merge Sort out-of-place
 // Do not modify the original array
 function mergeSort(arr) {
-
-  // Check if the input is length 1 or less
-    // If so, it's already sorted: return
-
-  // Divide the array in half
-
-  // Recursively sort the left half
-  // Recursively sort the right half
-
-  // Merge the halves together and return
-
+  let n = arr.length;
+  if(n < 2){
+    return arr;
+  }
+  let mid = Math.floor(n/2);
+  let left = arr.slice(0,mid)
+  let right = arr.slice(mid);
+  return merge(mergeSort(left),mergeSort(right))
 }
+
+
+  
+
+// Example usage:
+// const arr = [9, 4, 1, 6, 8, 2, 10, 3, 7, 5];
+// const sortedArr = mergeSort(arr);
+// console.log(sortedArr);
+
+
 
 
 // Takes in two sorted arrays and returns them merged into one
-function merge(arrA, arrB) {
+function merge(left, right) {
+  let indexleft = 0;
+  let indexright = 0;
+  let result = [];
+  while (indexleft < left.length && indexright < right.length) {
+    if (left[indexleft] < right[indexright]) {
+      result.push(left[indexleft]);
+      indexleft++;
+    } else {
+      result.push(right[indexright])
+      indexright++
+    }
+  }
 
-  // Create an empty return array
-
-  // Point to the first value of each array
-  // While there are still values in each array...
-    // Compare the first values of each array
-    // Add the smaller value to the return array
-    // Move the pointer to the next value in that array
-
-  // Return the return array
-
+  return result.concat(left.slice(indexleft), right.slice(indexright))
 }
+
+
 
 module.exports = [merge, mergeSort];
 
